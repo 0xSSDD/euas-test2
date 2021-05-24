@@ -93,11 +93,12 @@ class History extends StatelessWidget {
                 }
                 if(snapshot.hasData) {
                   print('deserialize-hasData');
-                  return Column(
+                  return SingleChildScrollView(
+                    child:Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: snapshot.data.map((firebaseCalculation) {
                       RandomNumberObject tr = RandomNumberObject.fromJson(firebaseCalculation);
-                      return Padding(
+                      return Container(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +109,7 @@ class History extends StatelessWidget {
                         ),
                       );
 
-                    }).toList(),);
+                    }).toList(),));
                 }
                 return Container();
               },
@@ -119,4 +120,33 @@ class History extends StatelessWidget {
     );
 
   }
+
+
+  // @override
+  // Widget buildHP(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       backgroundColor: Colors.blue,
+  //       title: Text("Previous random numbers"),
+  //     ),
+  //     body: StreamBuilder(
+  //       stream: FirebaseFirestore.instance.collection('numbers').snapshots(),
+  //       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+  //         if (!snapshot.hasData) {
+  //           return Center(
+  //             child: CircularProgressIndicator(),
+  //           );
+  //         }
+  //         return ListView(
+  //           children: snapshot.data.docs.map((document) {
+  //             return Container(
+  //               child:
+  //               Center(child: Text(document['randomNumber'])),
+  //             );
+  //           }).toList(),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
  }
